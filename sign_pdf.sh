@@ -2,7 +2,7 @@
 
 # Variables - adjust these paths to point to your actual files
 INPUT_PDF="input.pdf"          # The PDF to sign
-OUTPUT_PDF="signed_output.pdf"  # The output signed PDF
+OUTPUT_PDF="$(System.DefaultWorkingDirectory)/signed_output.pdf"  # Explicitly set the output path
 CERTIFICATE="certificate.pem"   # Your certificate file
 PRIVATE_KEY="private_key.pem"   # Your private key file
 
