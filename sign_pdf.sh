@@ -35,5 +35,7 @@ qpdf --replace-input --object-streams=generate \
 
 # Cleanup intermediate files
 rm -f "$HASH_FILE" "$SIGNATURE_FILE"
+OUTPUT_PDF="$(pwd)/signed_output.pdf"
+
 
 echo "PDF has been signed and saved as $OUTPUT_PDF."
