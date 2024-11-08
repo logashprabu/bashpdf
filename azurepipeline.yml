@@ -35,6 +35,12 @@ jobs:
       targetType: 'inline'
       script: ./sign_pdf.sh
 
+  - task: Bash@3
+    displayName: 'Verify Output File'
+    inputs:
+      targetType: 'inline'
+      script: ls -R $(System.DefaultWorkingDirectory)
+
   - task: PublishPipelineArtifact@1
     displayName: 'Upload Signed PDF'
     inputs:
