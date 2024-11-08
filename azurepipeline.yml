@@ -23,8 +23,17 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y qpdf openssl
 
-  - script: ./sign_pdf.sh
+  - task: Bash@3
+    displayName: 'Make sign_pdf.sh Executable'
+    inputs:
+      targetType: 'inline'
+      script: chmod +x ./sign_pdf.sh
+
+  - task: Bash@3
     displayName: 'Run PDF Signing Script'
+    inputs:
+      targetType: 'inline'
+      script: ./sign_pdf.sh
 
   - task: PublishPipelineArtifact@1
     displayName: 'Upload Signed PDF'
