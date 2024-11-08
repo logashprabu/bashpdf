@@ -1,14 +1,13 @@
-# azure-pipelines.yml
 trigger:
   branches:
     include:
-      - main  # or the branch you want to trigger on
+      - main
 
 jobs:
 - job: SignPDFJob
   displayName: 'Digitally Sign PDF'
   pool:
-    vmImage: 'ubuntu-latest'  # Use an Ubuntu VM image
+    vmImage: 'ubuntu-latest'
 
   steps:
   - task: UsePythonVersion@0
@@ -32,9 +31,12 @@ jobs:
         chmod +x sign_pdf.sh
         ./sign_pdf.sh
 
+  - script: ls -R $(System.DefaultWorkingDirectory)
+    displayName: 'List Files for Debugging'
+
   - task: PublishPipelineArtifact@1
     displayName: 'Upload Signed PDF'
     inputs:
-      targetPath: 'signed_output.pdf'  # Adjust if your output file has a different name
+      targetPath: '$(System.DefaultWorkingDirectory)/signed_output.pdf'
       artifactName: 'signed_pdf'
       publishLocation: 'pipeline'
