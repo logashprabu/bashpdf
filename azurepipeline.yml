@@ -15,24 +15,14 @@ jobs:
       versionSpec: '3.x'
     displayName: 'Set up Python environment'
 
-  - task: Bash@3
-    displayName: 'Install dependencies'
-    inputs:
-      targetType: 'inline'
-      script: |
-        sudo apt-get update
-        sudo apt-get install -y qpdf openssl
+  - script: |
+      python -m pip install --upgrade pip
+      pip install PyPDF2 pikepdf
+    displayName: 'Install Python dependencies'
 
-  - task: Bash@3
+  - script: |
+      python sign_pdf.py
     displayName: 'Run PDF Signing Script'
-    inputs:
-      targetType: 'inline'
-      script: |
-        chmod +x sign_pdf.sh
-        ./sign_pdf.sh
-
-  - script: ls -R $(System.DefaultWorkingDirectory)
-    displayName: 'List Files for Debugging'
 
   - task: PublishPipelineArtifact@1
     displayName: 'Upload Signed PDF'
